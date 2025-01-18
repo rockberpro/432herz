@@ -1,2 +1,5 @@
-document.getElementsByClassName('video-stream html5-main-video')[0].preservesPitch = false;
-document.getElementsByClassName('video-stream html5-main-video')[0].playbackRate = 0.981818;
+stream = document.getElementsByClassName('video-stream html5-main-video')[0];
+if (stream) {
+    stream.preservesPitch = false;
+    stream.playbackRate = 432 / 440;
+}
