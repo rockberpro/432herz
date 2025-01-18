@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "432Herzer",
+    "version": "1.0.0",
+    "description": "432Hz tunning extension",
+    "content_scripts": [
+        {
+            "matches": ["https://www.youtube.com/*"],
+            "js": ["popup.js"]
+        }
+    ],
+    "action":{
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icon.png",
+            "32": "icon.png",
+            "48": "icon.png",
+            "128": "icon.png"
+        }
+    },
+    "permissions": ["activeTab", "scripting", "tabs"],
+    "host_permissions": ["<all_urls>"]
+}
