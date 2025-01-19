@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "432Herzer",
+    "name": "432Herz",
     "version": "1.0.0",
-    "description": "432Hz tunning extension",
+    "description": "432Hz pitching for Youtube",
     "content_scripts": [
         {
             "matches": ["https://www.youtube.com/*"],
