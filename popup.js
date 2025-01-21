@@ -8,6 +8,9 @@ if (herzing432) {
                 files: ["432hz.js"]
             });
         }
+
+        herzing432.classList.toggle("pressed");
+        document.getElementById('herzing440').classList.remove("pressed");
     });    
 }
 
@@ -21,5 +24,8 @@ if (herzing440) {
                 files: ["440hz.js"]
             });
         }
+
+        herzing440.classList.toggle("pressed");
+        document.getElementById('herzing432').classList.remove("pressed");
     });   
 }

@@ -1,0 +1,21 @@
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px #0056b3;
+    border-radius: 4px;
+  }
+  
+  button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px #0056b3;
+  }
+  
+  button.pressed {
+    transform: translateY(2px);
+    box-shadow: 0 2px #0056b3;
+    background-color: #0056b3;
+  }
