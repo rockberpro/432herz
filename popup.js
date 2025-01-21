@@ -1,3 +1,14 @@
+document.addEventListener("DOMContentLoaded", () => {
+    chrome.storage.local.get(['herzing432_pressed', 'herzing440_pressed'], function(result) {
+        if (result.herzing432_pressed) {
+            document.getElementById('herzing432').classList.add("pressed");
+        }
+        if (result.herzing440_pressed) {
+            document.getElementById('herzing440').classList.add("pressed");
+        }
+    });
+})
+
 const herzing432 = document.getElementById('herzing432')
 if (herzing432) {
     herzing432.addEventListener('click', async () => {
@@ -11,6 +22,9 @@ if (herzing432) {
 
         herzing432.classList.toggle("pressed");
         document.getElementById('herzing440').classList.remove("pressed");
+
+        chrome.storage.local.set({ herzing432_pressed: true });
+        chrome.storage.local.set({ herzing440_pressed: false });
     });    
 }
 
@@ -27,5 +41,8 @@ if (herzing440) {
 
         herzing440.classList.toggle("pressed");
         document.getElementById('herzing432').classList.remove("pressed");
+
+        chrome.storage.local.set({ herzing432_pressed: false });
+        chrome.storage.local.set({ herzing440_pressed: true });
     });   
 }
