@@ -22,6 +22,5 @@
             "256": "256.png"
         }
     },
-    "permissions": ["activeTab", "scripting", "tabs", "storage"],
-    "host_permissions": ["<all_urls>"]
+    "permissions": ["activeTab", "scripting", "tabs", "storage"]
 }
