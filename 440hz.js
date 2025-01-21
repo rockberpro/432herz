@@ -1,4 +1,4 @@
-stream = document.getElementsByClassName('video-stream html5-main-video')[0];
+stream = document.querySelector('video');
 if (stream) {
     stream.preservesPitch = true;
     stream.playbackRate = 440 / 440;
