@@ -12,10 +12,11 @@
     "action":{
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "icon_16.png",
-            "32": "icon_32.png",
-            "48": "icon_48.png",
-            "128": "icon_128.png"
+            "16": "16.png",
+            "32": "32.png",
+            "48": "48.png",
+            "128": "128.png",
+            "256": "256.png"
         }
     },
     "permissions": ["activeTab", "scripting", "tabs"],
