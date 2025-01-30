@@ -1,15 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
-    chrome.storage.local.get(['herzing432_pressed', 'herzing440_pressed'], function(result) {
-        if (result.herzing432_pressed) {
-            document.getElementById('herzing432').classList.add("pressed");
-        }
-        if (result.herzing440_pressed) {
-            document.getElementById('herzing440').classList.add("pressed");
-        }
-    });
-})
+document.addEventListener("DOMContentLoaded", async () => {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (tab?.id) {
+        chrome.storage.local.get([`herzing432_${tab.id}`, `herzing440_${tab.id}`], (result) => {
 
-const herzing432 = document.getElementById('herzing432')
+            if (result[`herzing432_${tab.id}`]) {
+                document.getElementById('herzing432').classList.toggle("pressed");
+                document.getElementById('herzing440').classList.remove("pressed");
+            }
+
+            if (result[`herzing440_${tab.id}`]) {
+                document.getElementById('herzing440').classList.toggle("pressed");
+                document.getElementById('herzing432').classList.remove("pressed");
+            }
+        });
+    }
+});
+
+const herzing432 = document.getElementById('herzing432');
 if (herzing432) {
     herzing432.addEventListener('click', async () => {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -18,17 +25,17 @@ if (herzing432) {
                 target: { tabId: tab.id },
                 files: ["432hz.js"]
             });
+
+            update432HerzingTabState(tab.id, true);
+            update440HerzingTabState(tab.id, false);
+
+            document.getElementById('herzing432').classList.toggle("pressed");
+            document.getElementById('herzing440').classList.remove("pressed");
         }
-
-        herzing432.classList.toggle("pressed");
-        document.getElementById('herzing440').classList.remove("pressed");
-
-        chrome.storage.local.set({ herzing432_pressed: true });
-        chrome.storage.local.set({ herzing440_pressed: false });
-    });    
+    });
 }
 
-const herzing440 = document.getElementById('herzing440')
+const herzing440 = document.getElementById('herzing440');
 if (herzing440) {
     herzing440.addEventListener('click', async () => {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -37,12 +44,20 @@ if (herzing440) {
                 target: { tabId: tab.id },
                 files: ["440hz.js"]
             });
+
+            update432HerzingTabState(tab.id, false);
+            update440HerzingTabState(tab.id, true);
+
+            herzing440.classList.toggle("pressed");
+            document.getElementById('herzing432').classList.remove("pressed");
         }
+    });
+}
 
-        herzing440.classList.toggle("pressed");
-        document.getElementById('herzing432').classList.remove("pressed");
+function update432HerzingTabState(tabId, pressed) {
+    chrome.storage.local.set({ [`herzing432_${tabId}`]: pressed }, () => {});
+}
 
-        chrome.storage.local.set({ herzing432_pressed: false });
-        chrome.storage.local.set({ herzing440_pressed: true });
-    });   
+function update440HerzingTabState(tabId, pressed) {
+    chrome.storage.local.set({ [`herzing440_${tabId}`]: pressed }, () => {});
 }
