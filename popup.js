@@ -1,4 +1,5 @@
 
+/** execute when extension opens */
 (async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (tab?.id) {
@@ -17,6 +18,7 @@
     }
 })();
 
+
 const herzing432 = document.getElementById('herzing432');
 if (herzing432) {
     herzing432.addEventListener('click', async () => {
@@ -27,8 +29,8 @@ if (herzing432) {
                 files: ["432hz.js"]
             });
 
-            update432HerzingTabState(tab.id, false);
-            update440HerzingTabState(tab.id, true);
+            update432HerzingTabState(tab.id, true);
+            update440HerzingTabState(tab.id, false);
 
             document.getElementById('herzing432').classList.toggle("pressed");
             document.getElementById('herzing440').classList.remove("pressed");
@@ -36,7 +38,7 @@ if (herzing432) {
     });
 }
 
-const herzing440 = document.getElementById('herzing440')
+const herzing440 = document.getElementById('herzing440');
 if (herzing440) {
     herzing440.addEventListener('click', async () => {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -56,9 +58,13 @@ if (herzing440) {
 }
 
 function update432HerzingTabState(tabId, pressed) {
-    chrome.storage.local.set({ [`herzing432_${tabId}`]: pressed }, () => {});
+    chrome.storage.local.set({ [`herzing432_${tabId}`]: pressed }, () => {
+        // console.log(`herzing432_${tabId} set to ${pressed}`);
+    });
 }
 
 function update440HerzingTabState(tabId, pressed) {
-    chrome.storage.local.set({ [`herzing440_${tabId}`]: pressed }, () => {});
+    chrome.storage.local.set({ [`herzing440_${tabId}`]: pressed }, () => {
+        // console.log(`herzing440_${tabId} set to ${pressed}`);
+    });
 }
