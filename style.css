@@ -2,12 +2,17 @@ button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 0.75rem 1.5rem;
+    margin: 0.5rem;
+    border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 4px #0056b3;
-    border-radius: 50px;
-  }
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
   
   button:active {
     transform: translateY(2px);
@@ -15,21 +20,26 @@ button {
   }
   
   button.pressed {
-    transform: translateY(2px);
     box-shadow: 0 2px #0056b3;
     background-color: #0056b3;
   }
 
-  h1 {
+  body {
     font-family: 'Arial', sans-serif;
-    font-size: 36px;
+    background-color: #f4f4f9;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;    
+    padding-bottom: 2vh;
+    margin: 5vw;
+}
+
+h1 {
+    font-size: 3rem;
     font-weight: bold;
-    text-align: center;
-    color: #ffffff;
-    background: linear-gradient(90deg, #007bff, #0056b3);
-    background-clip: text;
+    background: linear-gradient(90deg, #007bff, #00bfff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 20px 0;
-  }
+    font-family: 'Georia', sans-serif;
+    text-align: center;
+}
