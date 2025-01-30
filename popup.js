@@ -58,13 +58,9 @@ if (herzing440) {
 }
 
 function update432HerzingTabState(tabId, pressed) {
-    chrome.storage.local.set({ [`herzing432_${tabId}`]: pressed }, () => {
-        // console.log(`herzing432_${tabId} set to ${pressed}`);
-    });
+    chrome.storage.local.set({ [`herzing432_${tabId}`]: pressed }, () => {});
 }
 
 function update440HerzingTabState(tabId, pressed) {
-    chrome.storage.local.set({ [`herzing440_${tabId}`]: pressed }, () => {
-        // console.log(`herzing440_${tabId} set to ${pressed}`);
-    });
+    chrome.storage.local.set({ [`herzing440_${tabId}`]: pressed }, () => {});
 }
