@@ -1,6 +1,4 @@
-
-/** execute when extension opens */
-(async () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (tab?.id) {
         chrome.storage.local.get([`herzing432_${tab.id}`, `herzing440_${tab.id}`], (result) => {
@@ -16,8 +14,7 @@
             }
         });
     }
-})();
-
+});
 
 const herzing432 = document.getElementById('herzing432');
 if (herzing432) {
