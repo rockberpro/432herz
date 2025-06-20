@@ -43,8 +43,8 @@
         /* Observes changes in the DOM */
         const observer = new MutationObserver(tryApply);
         observer.observe(document.body, { childList: true, subtree: true });
-        /** Apply periodically */
-        setInterval(tryApply, 2000);
+        /** Applies continuously every 1 second */
+        setInterval(tryApply, 1000);
     }
 
     /** Getting the tabId via chrome.runtime (mensagem do background) */
