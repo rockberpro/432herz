@@ -1,24 +1,24 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (tab?.id) {
-        chrome.storage.local.get([`herzing432_${tab.id}`, `herzing440_${tab.id}`], (result) => {
+        chrome.storage.local.get([`herz432_${tab.id}`, `herz440_${tab.id}`], (result) => {
 
-            if (result[`herzing432_${tab.id}`]) {
-                document.getElementById('herzing432').classList.toggle("pressed");
-                document.getElementById('herzing440').classList.remove("pressed");
+            if (result[`herz432_${tab.id}`]) {
+                document.getElementById('herz432').classList.toggle("pressed");
+                document.getElementById('herz440').classList.remove("pressed");
             }
 
-            if (result[`herzing440_${tab.id}`]) {
-                document.getElementById('herzing440').classList.toggle("pressed");
-                document.getElementById('herzing432').classList.remove("pressed");
+            if (result[`herz440_${tab.id}`]) {
+                document.getElementById('herz440').classList.toggle("pressed");
+                document.getElementById('herz432').classList.remove("pressed");
             }
         });
     }
 });
 
-const herzing432 = document.getElementById('herzing432');
-if (herzing432) {
-    herzing432.addEventListener('click', async () => {
+const herz432 = document.getElementById('herz432');
+if (herz432) {
+    herz432.addEventListener('click', async () => {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         if (tab?.id) {
             chrome.scripting.executeScript({
@@ -29,15 +29,15 @@ if (herzing432) {
             update432HerzingTabState(tab.id, true);
             update440HerzingTabState(tab.id, false);
 
-            document.getElementById('herzing432').classList.toggle("pressed");
-            document.getElementById('herzing440').classList.remove("pressed");
+            document.getElementById('herz432').classList.toggle("pressed");
+            document.getElementById('herz440').classList.remove("pressed");
         }
     });
 }
 
-const herzing440 = document.getElementById('herzing440');
-if (herzing440) {
-    herzing440.addEventListener('click', async () => {
+const herz440 = document.getElementById('herz440');
+if (herz440) {
+    herz440.addEventListener('click', async () => {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         if (tab?.id) {
             chrome.scripting.executeScript({
@@ -48,16 +48,16 @@ if (herzing440) {
             update432HerzingTabState(tab.id, false);
             update440HerzingTabState(tab.id, true);
 
-            herzing440.classList.toggle("pressed");
-            document.getElementById('herzing432').classList.remove("pressed");
+            herz440.classList.toggle("pressed");
+            document.getElementById('herz432').classList.remove("pressed");
         }
     });
 }
 
 function update432HerzingTabState(tabId, pressed) {
-    chrome.storage.local.set({ [`herzing432_${tabId}`]: pressed }, () => {});
+    chrome.storage.local.set({ [`herz432_${tabId}`]: pressed }, () => {});
 }
 
 function update440HerzingTabState(tabId, pressed) {
-    chrome.storage.local.set({ [`herzing440_${tabId}`]: pressed }, () => {});
+    chrome.storage.local.set({ [`herz440_${tabId}`]: pressed }, () => {});
 }
