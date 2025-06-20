@@ -52,12 +52,12 @@
         const tabId = response?.tabId;
         if (!tabId) return;
         chrome.storage.local.get([
-            `herzing432_${tabId}`,
-            `herzing440_${tabId}`
+            `herz432_${tabId}`,
+            `herz440_${tabId}`
         ], (result) => {
-            if (result[`herzing432_${tabId}`]) {
+            if (result[`herz432_${tabId}`]) {
                 waitForMainVideoAndApply(tabId, '432');
-            } else if (result[`herzing440_${tabId}`]) {
+            } else if (result[`herz440_${tabId}`]) {
                 waitForMainVideoAndApply(tabId, '440');
             }
         });
