@@ -6,7 +6,8 @@
     "content_scripts": [
         {
             "matches": ["https://www.youtube.com/*"],
-            "js": ["popup.js"]
+            "js": ["youtube_injector.js"],
+            "run_at": "document_idle"
         }
     ],
     "background": {
