@@ -1,5 +1,10 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === "complete" && tab.url && (tab.url.includes("youtube.com") || tab.url.includes("music.youtube.com"))) {
+    if (changeInfo.status === "complete" && tab.url
+        && (
+           tab.url.includes("youtube.com")
+        || tab.url.includes("music.youtube.com")
+        )
+    ) {
         // Check if the "All tabs" option is enabled
         chrome.storage.local.get(['herz_all_tabs', 'herz432_global', 'herz440_global'], (result) => {
             if (result.herz_all_tabs) {
