@@ -2,9 +2,7 @@
 (function() {
     /**
      * Checks if an ad is playing
-     * 
      * * if `div.ad-showing` is null, it means the main video is playing
-     * 
      * @return {boolean}
      */
     function isMainVideo() {
@@ -57,14 +55,14 @@
                 applyHzScript(tabId, mode);
             }
         };
-        /* Observes changes in the DOM */
+        // Observes changes in the DOM
         observer = new MutationObserver(tryApply);
         observer.observe(document.body, { childList: true, subtree: true });
-        /* Applies continuously every 1 second */
+        // Applies continuously every 1 second
         intervalId = setInterval(tryApply, 1000);
     }
 
-    /** Getting the tabId via chrome.runtime (mensagem do background) */
+    // Getting the tabId via chrome.runtime (message from background)
     chrome.runtime.sendMessage({ action: 'getTabId' }, (response) => {
         const tabId = response?.tabId;
         if (!tabId) return;
@@ -76,9 +74,9 @@
                 'herz432_global',
                 'herz440_global'
             ], (result) => {
-                // Verificar se a opção "All tabs" está ativada
+                // Check if the "All tabs" option is enabled
                 if (result.herz_all_tabs) {
-                    // Se "All tabs" estiver ativado, usar configurações globais
+                    // If "All tabs" is enabled, use global settings
                     if (result.herz432_global) {
                         waitForMainVideoAndApply(tabId, '432');
                     } else if (result.herz440_global) {
@@ -87,7 +85,7 @@
                         clearWatchers();
                     }
                 } else {
-                    // Se não, usar configurações específicas da aba
+                    // Otherwise, use tab-specific settings
                     if (result[`herz432_${tabId}`]) {
                         waitForMainVideoAndApply(tabId, '432');
                     } else if (result[`herz440_${tabId}`]) {
@@ -99,7 +97,7 @@
             });
         }
         checkAndApply();
-        /* Listen for changes in storage and re-apply if needed */
+        // Listen for changes in storage and re-apply if needed
         chrome.storage.onChanged.addListener((changes, area) => {
             if (area === 'local') {
                 const relevantKeys = [

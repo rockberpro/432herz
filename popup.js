@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     
-    // Verificar se a opção "All tabs" está ativada
+    // Check if the "All tabs" option is enabled
     chrome.storage.local.get(['herz_all_tabs', `herz432_${tab.id}`, `herz440_${tab.id}`, 'herz432_global', 'herz440_global'], (result) => {
-        // Definir o estado do checkbox "All tabs"
+        // Set the state of the "All tabs" checkbox
         document.getElementById('allTabs').checked = result.herz_all_tabs === true;
 
         if (result.herz_all_tabs) {
-            // Se "All tabs" estiver ativado, usar as configurações globais
+            // If "All tabs" is enabled, use global settings
             if (result.herz432_global) {
                 document.getElementById('herz432').classList.toggle("pressed");
                 document.getElementById('herz440').classList.remove("pressed");
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 document.getElementById('herz432').classList.remove("pressed");
             }
         } else if (tab?.id) {
-            // Se não, usar as configurações da aba específica
+            // Otherwise, use the specific tab settings
             if (result[`herz432_${tab.id}`]) {
                 document.getElementById('herz432').classList.toggle("pressed");
                 document.getElementById('herz440').classList.remove("pressed");
@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Adicionar listener para o checkbox "All tabs"
+    // Add listener for the "All tabs" checkbox
     document.getElementById('allTabs').addEventListener('change', function() {
         const allTabsEnabled = this.checked;
         chrome.storage.local.set({ 'herz_all_tabs': allTabsEnabled }, () => {
-            // Se ativar "All tabs", copiar as configurações da aba atual para as globais
+            // If "All tabs" is activated, copy current tab settings to global settings
             if (allTabsEnabled && tab?.id) {
                 chrome.storage.local.get([`herz432_${tab.id}`, `herz440_${tab.id}`], (result) => {
                     chrome.storage.local.set({ 
@@ -55,7 +55,7 @@ if (herz432) {
         const allTabsEnabled = document.getElementById('allTabs').checked;
 
         if (allTabsEnabled) {
-            // Aplicar em todas as abas do YouTube
+            // Apply to all YouTube tabs
             const youtubeTabs = await chrome.tabs.query({ url: "*://*.youtube.com/*" });
             for (const ytTab of youtubeTabs) {
                 chrome.scripting.executeScript({
@@ -64,13 +64,13 @@ if (herz432) {
                 });
             }
 
-            // Atualizar configurações globais
+            // Update global settings
             chrome.storage.local.set({
                 'herz432_global': true,
                 'herz440_global': false
             });
         } else if (tab?.id) {
-            // Aplicar apenas na aba atual
+            // Apply only to the current tab
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 files: ["432hz.js"]
@@ -92,7 +92,7 @@ if (herz440) {
         const allTabsEnabled = document.getElementById('allTabs').checked;
 
         if (allTabsEnabled) {
-            // Aplicar em todas as abas do YouTube
+            // Apply to all YouTube tabs
             const youtubeTabs = await chrome.tabs.query({ url: "*://*.youtube.com/*" });
             for (const ytTab of youtubeTabs) {
                 chrome.scripting.executeScript({
@@ -101,13 +101,13 @@ if (herz440) {
                 });
             }
 
-            // Atualizar configurações globais
+            // Update global settings
             chrome.storage.local.set({
                 'herz432_global': false,
                 'herz440_global': true
             });
         } else if (tab?.id) {
-            // Aplicar apenas na aba atual
+            // Apply only to the current tab
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 files: ["440hz.js"]

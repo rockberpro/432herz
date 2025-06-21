@@ -1,9 +1,9 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === "complete" && tab.url && tab.url.includes("youtube.com")) {
-        // Verificar se a opção "All tabs" está ativada
+        // Check if the "All tabs" option is enabled
         chrome.storage.local.get(['herz_all_tabs', 'herz432_global', 'herz440_global'], (result) => {
             if (result.herz_all_tabs) {
-                // Se "All tabs" estiver ativado, aplicar configurações globais
+                // If "All tabs" is enabled, apply global settings
                 if (result.herz432_global) {
                     chrome.scripting.executeScript({
                         target: { tabId: tab.id },
