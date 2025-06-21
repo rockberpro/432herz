@@ -71,12 +71,30 @@
         function checkAndApply() {
             chrome.storage.local.get([
                 `herz432_${tabId}`,
-                `herz440_${tabId}`
+                `herz440_${tabId}`,
+                'herz_all_tabs',
+                'herz432_global',
+                'herz440_global'
             ], (result) => {
-                if (result[`herz432_${tabId}`]) {
-                    waitForMainVideoAndApply(tabId, '432');
-                } else if (result[`herz440_${tabId}`]) {
-                    waitForMainVideoAndApply(tabId, '440');
+                // Verificar se a opção "All tabs" está ativada
+                if (result.herz_all_tabs) {
+                    // Se "All tabs" estiver ativado, usar configurações globais
+                    if (result.herz432_global) {
+                        waitForMainVideoAndApply(tabId, '432');
+                    } else if (result.herz440_global) {
+                        waitForMainVideoAndApply(tabId, '440');
+                    } else {
+                        clearWatchers();
+                    }
+                } else {
+                    // Se não, usar configurações específicas da aba
+                    if (result[`herz432_${tabId}`]) {
+                        waitForMainVideoAndApply(tabId, '432');
+                    } else if (result[`herz440_${tabId}`]) {
+                        waitForMainVideoAndApply(tabId, '440');
+                    } else {
+                        clearWatchers();
+                    }
                 }
             });
         }
@@ -84,7 +102,15 @@
         /* Listen for changes in storage and re-apply if needed */
         chrome.storage.onChanged.addListener((changes, area) => {
             if (area === 'local') {
-                if (changes[`herz432_${tabId}`] || changes[`herz440_${tabId}`]) {
+                const relevantKeys = [
+                    `herz432_${tabId}`,
+                    `herz440_${tabId}`,
+                    'herz_all_tabs',
+                    'herz432_global',
+                    'herz440_global'
+                ];
+                const hasRelevantChanges = relevantKeys.some(key => changes[key]);
+                if (hasRelevantChanges) {
                     checkAndApply();
                 }
             }

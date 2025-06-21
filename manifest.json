@@ -23,7 +23,7 @@
             "256": "256.png"
         }
     },
-    "permissions": ["activeTab", "scripting", "storage"],
+    "permissions": ["activeTab", "scripting", "storage", "tabs"],
     "icons": {
         "16": "16.png",
         "32": "32.png",
