@@ -22,8 +22,10 @@
             "128": "128.png",
             "256": "256.png"
         }
-    },
-    "permissions": ["activeTab", "scripting", "storage", "tabs"],
+    },    "permissions": ["activeTab", "scripting", "storage", "tabs"],
+    "host_permissions": [
+        "https://www.youtube.com/*"
+    ],
     "icons": {
         "16": "16.png",
         "32": "32.png",
