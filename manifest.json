@@ -2,10 +2,9 @@
     "manifest_version": 3,
     "name": "432Herz",
     "version": "1.0.2",
-    "description": "Play your YouTube videos in 432Hz",
-    "content_scripts": [
+    "description": "Play your YouTube videos in 432Hz",    "content_scripts": [
         {
-            "matches": ["https://www.youtube.com/*"],
+            "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*"],
             "js": ["youtube_injector.js"],
             "run_at": "document_idle"
         }
@@ -22,8 +21,10 @@
             "128": "128.png",
             "256": "256.png"
         }
-    },
-    "permissions": ["activeTab", "scripting", "storage"],
+    },    "permissions": ["activeTab", "scripting", "storage", "tabs"],    "host_permissions": [
+        "https://www.youtube.com/*",
+        "https://music.youtube.com/*"
+    ],
     "icons": {
         "16": "16.png",
         "32": "32.png",
