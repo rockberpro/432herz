@@ -1,3 +1,8 @@
+// Reset all settings when the browser starts (after being fully closed)
+chrome.runtime.onStartup.addListener(() => {
+    chrome.storage.local.clear(() => {});
+});
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === "complete" && tab.url
         && (
